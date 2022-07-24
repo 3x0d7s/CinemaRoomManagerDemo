@@ -24,4 +24,15 @@ class Calculator {
             return sumFromTheFront + sumFromTheBack;
         }
     }
+
+    static int calculateCostForSeat(char[][] seatsArr ,int row, int seat) {
+        seatsArr[row][seat] = 'B';
+        if (seatsArr.length * seatsArr[0].length <= 60) {
+            return 10;
+        } else if (row < seatsArr.length / 2 ) {
+            return 10;
+        } else {
+            return 8;
+        }
+    }
 }

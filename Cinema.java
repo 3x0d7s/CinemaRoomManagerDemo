@@ -1,18 +1,37 @@
 package cinema;
 
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class Cinema {
+    static char[][] seatsArr;
+
     public static void main(String[] args) {
-        //outputTheArrangement(7, 8);
-        Calculator.calculateIncome();
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the number of rows:\n> ");
+        int rows = scanner.nextInt();
+        System.out.print("Enter the number of seats in each row:\n> ");
+        int seats = scanner.nextInt();
+
+        System.out.println();
+        seatsArr = initSeatsArr(rows, seats);
+        printTheArrangement(seatsArr);
+        System.out.println();
+
+        System.out.print("Enter a row number:\n> ");
+        int row = scanner.nextInt() - 1;
+        System.out.print("Enter a seat number in that row:\n> ");
+        int seat = scanner.nextInt() - 1;
+
+        int price = Calculator.calculateCostForSeat(seatsArr, row, seat);
+        System.out.printf("%nTicket price: $%s%n", price);
+        printTheArrangement(seatsArr);
     }
-    
-    static void outputTheArrangement(int rows, int columns) {
+    static void printTheArrangement(char[][] seats) {
+        int rows = seats.length;
+        int columns = seats[0].length;
         int[] rowsArr = createArrWithOrderNumbers(rows);
         int[] columnsArr = createArrWithOrderNumbers(columns);
-        char[][] seats = new char[rows][columns];
-        fillSeatsArr(seats);
 
         System.out.print("Cinema:\n  ");
         for (int index = 0; index < columns ; index++) {
@@ -39,10 +58,12 @@ public class Cinema {
         return result;
     }
 
-    static void fillSeatsArr(char[][] arr) {
+    static char[][] initSeatsArr(int rows, int seats) {
+        char[][] arr = new char[rows][seats];
         for(char[] row: arr){
             Arrays.fill(row, 'S');
         }
+        return arr;
     }
 
 }
