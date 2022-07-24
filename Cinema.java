@@ -8,46 +8,46 @@ public class Cinema {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+
         System.out.print("Enter the number of rows:\n> ");
         int rows = scanner.nextInt();
         System.out.print("Enter the number of seats in each row:\n> ");
         int seats = scanner.nextInt();
-
-        System.out.println();
         seatsArr = initSeatsArr(rows, seats);
-        printTheArrangement(seatsArr);
-        System.out.println();
 
+        boolean isShouldBeStopped = true;
+        while (isShouldBeStopped) {
+            System.out.println();
+            Output.printMenuItems();
+            System.out.print("> ");
+            int item = scanner.nextInt();
+            switch (item) {
+                case 0: {
+                    isShouldBeStopped = false;
+                    break;
+                } case 1: {
+                    System.out.println();
+                    Output.printTheArrangement(seatsArr);
+                    break;
+                } case 2: {
+                    System.out.println();
+                    tickedServiceMenu(scanner);
+                    break;
+                }
+            }
+
+        }
+        scanner.close();
+
+    }
+
+    static void tickedServiceMenu(Scanner scanner) {
         System.out.print("Enter a row number:\n> ");
         int row = scanner.nextInt() - 1;
         System.out.print("Enter a seat number in that row:\n> ");
         int seat = scanner.nextInt() - 1;
-
         int price = Calculator.calculateCostForSeat(seatsArr, row, seat);
-        System.out.printf("%nTicket price: $%s%n", price);
-        printTheArrangement(seatsArr);
-    }
-    static void printTheArrangement(char[][] seats) {
-        int rows = seats.length;
-        int columns = seats[0].length;
-        int[] rowsArr = createArrWithOrderNumbers(rows);
-        int[] columnsArr = createArrWithOrderNumbers(columns);
-
-        System.out.print("Cinema:\n  ");
-        for (int index = 0; index < columns ; index++) {
-            System.out.print(columnsArr[index]);
-            if (index != columns - 1) System.out.print(" ");
-        }
-
-        System.out.println();
-        for (int i = 0; i < rows; i++) {
-            System.out.print(rowsArr[i] + " ");
-            for (int j = 0; j < columns; j++) {
-                System.out.print(seats[i][j]);
-                if(j != columns - 1) System.out.print(" ");
-            }
-            System.out.println();
-        }
+        System.out.printf("Ticket price: $%s%n", price);
     }
     
     static int[] createArrWithOrderNumbers(int len) {

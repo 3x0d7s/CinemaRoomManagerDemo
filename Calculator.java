@@ -3,6 +3,7 @@ package cinema;
 import java.util.Scanner;
 
 class Calculator {
+   /*
     static void calculateIncome() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter the number of rows:\n> ");
@@ -13,6 +14,7 @@ class Calculator {
         int result = calculateIncome(rows, columns);
         System.out.print("Total income:\n$" + result);
     }
+    */
 
     static int calculateIncome(int rows, int columns) {
         if (rows * columns <= 60) {
