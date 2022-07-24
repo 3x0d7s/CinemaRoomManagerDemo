@@ -4,7 +4,16 @@ class Output {
     static void printMenuItems() {
         System.out.println("1. Show the seats");
         System.out.println("2. Buy a ticket");
+        System.out.println("3. Statistics");
         System.out.println("0. Exit");
+    }
+
+    static void printStatistics() {
+        Cinema.percentage = Calculator.calculatePercentage();
+        System.out.println("Number of purchased tickets: " + Cinema.purchasedTickets);
+        System.out.printf("Percentage: %.2f%c%n", Cinema.percentage, '%');
+        System.out.println("Current income: $" + Cinema.currentIncome);
+        System.out.println("Total income: $" + Cinema.totalIncome);
     }
 
     static void printTheArrangement(char[][] seats) {

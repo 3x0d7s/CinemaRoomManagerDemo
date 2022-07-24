@@ -4,50 +4,44 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Cinema {
+    static Scanner scanner = new Scanner(System.in);
     static char[][] seatsArr;
+    static int rows, seats;
+    static int purchasedTickets = 0;
+    static int totalIncome, currentIncome = 0;
+    static double percentage;
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.print("Enter the number of rows:\n> ");
-        int rows = scanner.nextInt();
-        System.out.print("Enter the number of seats in each row:\n> ");
-        int seats = scanner.nextInt();
-        seatsArr = initSeatsArr(rows, seats);
+        Input.setSeatsArr(scanner);
+        totalIncome = Calculator.calculateTotalIncome(rows, seats);
 
         boolean isShouldBeStopped = true;
         while (isShouldBeStopped) {
             System.out.println();
             Output.printMenuItems();
             System.out.print("> ");
+
             int item = scanner.nextInt();
             switch (item) {
-                case 0: {
+                case 0 -> {
                     isShouldBeStopped = false;
-                    break;
-                } case 1: {
+                } case 1 -> {
                     System.out.println();
                     Output.printTheArrangement(seatsArr);
-                    break;
-                } case 2: {
+                } case 2 -> {
                     System.out.println();
-                    tickedServiceMenu(scanner);
-                    break;
+                    Input.ticketServiceMenu(scanner);
+                } case 3 -> {
+                    System.out.println();
+                    Output.printStatistics();
+                } default -> {
+                    System.out.println("\nWrong input!");
                 }
             }
 
         }
         scanner.close();
 
-    }
-
-    static void tickedServiceMenu(Scanner scanner) {
-        System.out.print("Enter a row number:\n> ");
-        int row = scanner.nextInt() - 1;
-        System.out.print("Enter a seat number in that row:\n> ");
-        int seat = scanner.nextInt() - 1;
-        int price = Calculator.calculateCostForSeat(seatsArr, row, seat);
-        System.out.printf("Ticket price: $%s%n", price);
     }
     
     static int[] createArrWithOrderNumbers(int len) {

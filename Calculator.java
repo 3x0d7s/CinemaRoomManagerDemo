@@ -3,20 +3,12 @@ package cinema;
 import java.util.Scanner;
 
 class Calculator {
-   /*
-    static void calculateIncome() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter the number of rows:\n> ");
-        int rows = scanner.nextInt();
-        System.out.print("Enter the number of seats in each row:\n> ");
-        int columns = scanner.nextInt();
-        scanner.close();
-        int result = calculateIncome(rows, columns);
-        System.out.print("Total income:\n$" + result);
-    }
-    */
 
-    static int calculateIncome(int rows, int columns) {
+    static double calculatePercentage() {
+        return 100.0 * Cinema.purchasedTickets / (Cinema.rows * Cinema.seats);
+    }
+
+    static int calculateTotalIncome(int rows, int columns) {
         if (rows * columns <= 60) {
             return rows * columns * 10;
         } else {
@@ -37,4 +29,5 @@ class Calculator {
             return 8;
         }
     }
+
 }
